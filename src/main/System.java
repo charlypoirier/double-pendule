@@ -1,4 +1,4 @@
-package doublependule;
+package main;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,18 +9,18 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Systeme extends JPanel implements KeyListener, ActionListener{
+public class System extends JPanel implements KeyListener, ActionListener{
     
-    public static final double GRAVITE = 0.3;
+    public static final double GRAVITY = 0.3;
     private final Timer timer;
-    private final DoublePendule doublePendule;
+    private final DoublePendulum doublePendulum;
     
-    public Systeme(int largeur, int hauteur){
+    public System(int width, int height){
         this.addKeyListener(this);
         this.setFocusable(true);
         this.setFocusTraversalKeysEnabled(false);
         
-        doublePendule = new DoublePendule(largeur/2, hauteur/2, 170, 170, 1, 1, 30, 30);
+        doublePendulum = new DoublePendulum(width/2, height/2, 170, 170, 1, 1, 30, 30);
         
         timer = new Timer(5, this);
         timer.start();
@@ -28,18 +28,18 @@ public class Systeme extends JPanel implements KeyListener, ActionListener{
     
     @Override
     public void paint(Graphics g){
-        // Fond
+        // Background
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         
-        // Double pendule
-        doublePendule.dessiner(g);
+        // Double pendulum
+        doublePendulum.draw(g);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
-        doublePendule.actualiser();
+        doublePendulum.update();
         repaint();
     }
     
